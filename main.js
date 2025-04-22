@@ -52,7 +52,13 @@ class weapon {
   }
 
   ip_coeficient() {
-    return ((this.#end_level - this.#initial_level) * this.ip_per_level) / total_fame_cost();
+    return ((this.#end_level - this.#initial_level) * this.ip_per_level) / this.total_fame_cost();
   }
 
 }
+
+let weapon1 = new weapon("Machado de Guerra", 95, 100, 0.2);
+let weapon2 = new weapon("Patas de Urso", 10, 50, 0.1);
+
+console.log(weapon1.ip_coeficient());
+console.log(weapon2.ip_coeficient());
