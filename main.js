@@ -12,14 +12,12 @@ const fame_value = [29782, 60444, 92009, 124504, 157958, 192398, 227853, 264354,
 
 class weapon {
   #name;
-  #initial_level;
-  #end_level;
+  #current_level;
   #ip_per_level;
 
-  constructor(name, initial_level, end_level, ip_per_level) {
+  constructor(name, current_level, ip_per_level) {
     this.#name = name;
-    this.#initial_level = initial_level;
-    this.#end_level = end_level;
+    this.#current_level = current_level;
     this.#ip_per_level = ip_per_level;
   }
 
@@ -27,38 +25,31 @@ class weapon {
     return this.#name;
   }
 
-  get initial_level() {
-    return this.#initial_level;
+  get current_level() {
+    return this.#current_level;
   }
 
-  set initial_level(value) {
-    this.#initial_level = value;
-  }
-
-  get end_level() {
-    return this.#end_level;
-  }
-
-  set end_level(value) {
-    this.#end_level = value;
+  set current_level(value) {
+    this.#current_level = value;
   }
 
   get ip_per_level() {
     return this.#ip_per_level;
   }
 
-  total_fame_cost() {
-    return fame_value[this.#end_level - 2] - fame_value[this.#initial_level - 2];
+  total_fame_cost(desired_level) {
+    return fame_value[desired_level - 2] - fame_value[this.#current_level - 2];
   }
 
-  ip_coeficient() {
-    return ((this.#end_level - this.#initial_level) * this.ip_per_level) / this.total_fame_cost();
+  ip_coeficient(desired_level) {
+    return ((desired_level - this.#current_level) * this.ip_per_level) / this.total_fame_cost(desired_level);
   }
-
 }
 
-let weapon1 = new weapon("Machado de Guerra", 95, 100, 0.2);
-let weapon2 = new weapon("Patas de Urso", 10, 50, 0.1);
+player_yellow_fame = 5000000;
 
-console.log(weapon1.ip_coeficient());
-console.log(weapon2.ip_coeficient());
+let weapon1 = new weapon("Machado de Guerra", 95, 0.2);
+let weapon2 = new weapon("Patas de Urso", 10, 0.1);
+
+console.log(weapon1.ip_coeficient(99));
+console.log(weapon2.ip_coeficient(50));
